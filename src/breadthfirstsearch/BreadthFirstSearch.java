@@ -27,7 +27,6 @@ public class BreadthFirstSearch {
         {
             this.cidade=cidade;
             this.neighbours=new ArrayList<>();
- 
         }
         public void addneighbours(No neighbourNode)
         {
@@ -46,12 +45,10 @@ public class BreadthFirstSearch {
         queue = new LinkedList<No>();
     }
  
-    public void bfs(No no)
-    {
+    public void bfs(No no){
         queue.add(no);
         no.visited=true;
-        while (!queue.isEmpty())
-        {
+        while (!queue.isEmpty()){
             No element=queue.remove();
             if ("Bucharest".equals(element.cidade)){
                 System.out.print(element.cidade + "  ");
@@ -66,7 +63,6 @@ public class BreadthFirstSearch {
                 {
                     queue.add(n);
                     n.visited=true;
- 
                 }  
             }
             /*if ("Bucharest".equals(element.cidade)){
