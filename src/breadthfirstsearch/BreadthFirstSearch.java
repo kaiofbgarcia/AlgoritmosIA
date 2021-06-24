@@ -53,7 +53,12 @@ public class BreadthFirstSearch {
         while (!queue.isEmpty())
         {
             No element=queue.remove();
+            if ("Bucharest".equals(element.cidade)){
+                System.out.print(element.cidade + "  ");
+                break;
+            }else{
             System.out.print(element.cidade + " | ");
+            }
             List<No> neighbours=element.getNeighbours();
             for (int i = 0; i < neighbours.size(); i++) {
                 No n=neighbours.get(i);
@@ -64,9 +69,9 @@ public class BreadthFirstSearch {
  
                 }  
             }
-            if ("Bucharest".equals(element.cidade)){
+            /*if ("Bucharest".equals(element.cidade)){
                 break;
-            }
+            }*/
         }
     }
  
