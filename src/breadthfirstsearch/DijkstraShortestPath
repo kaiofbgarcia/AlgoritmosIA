@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-class ShortestPath {// Função utilizada para encontrar o vertice com menor distancia do vertice
-    static final int V = 21; //Numero de Vertices + 1
+class ShortestPath {                // Função utilizada para encontrar o vertice com menor distancia do vertice
+    static final int V = 21;        //Numero de Vertices + 1
     int minDistance(int dist[], Boolean sptSet[]){
         int min = Integer.MAX_VALUE, min_index = -1;//Inicializa o menor valor
         for (int v = 0; v < V; v++)
@@ -11,7 +11,7 @@ class ShortestPath {// Função utilizada para encontrar o vertice com menor dis
             }
         return min_index;
     }
-    void printSolution(int dist[], int src){ // Função utilizada para printar a solução
+    void printSolution(int dist[], int src){        // Função utilizada para printar a solução
         ArrayList<String> cities = new ArrayList(); //Array das cidades para printar com a distancia
         cities.add("nulo");
         cities.add("Arad");
@@ -41,7 +41,7 @@ class ShortestPath {// Função utilizada para encontrar o vertice com menor dis
             System.out.println(cities.get(i)+"  -|-  "+ dist[i]);
         }
     }
-    void dijkstra(int graph[][], int src){
+    void dijkstra(int graph[][], int src){ // Essa função que implementa o algoritmo de Dijkstra usando a matriz de adjacencia
         int dist[] = new int[V];
         Boolean sptSet[] = new Boolean[V];
         for (int i = 0; i < V; i++) {
@@ -60,7 +60,7 @@ class ShortestPath {// Função utilizada para encontrar o vertice com menor dis
     }
  
     public static void main(String[] args){ 
-        int graph[][] = new int[][]{//{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}  Matriz 
+        int graph[][] = new int[][]{//{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}  Matriz de adjacencia 
                                  /*0*/{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                                  /*1*/{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 118, 0, 0, 75},
                                  /*2*/{ 0, 0, 0, 0, 0, 0, 211, 90, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 85, 0, 0},
