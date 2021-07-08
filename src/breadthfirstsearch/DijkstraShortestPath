@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-class ShortestPath {                // Função utilizada para encontrar o vertice com menor distancia do vertice
+class ShortestPath {                
     static final int V = 21;        //Numero de Vertices + 1
-    int minDistance(int dist[], Boolean sptSet[]){
-        int min = Integer.MAX_VALUE, min_index = -1;//Inicializa o menor valor
+    int minDistance(int dist[], Boolean sptSet[]){  // Função utilizada para encontrar o vertice seguinte com menor distancia do vertice origem
+        int min = Integer.MAX_VALUE, min_index = -1;    //Inicializa o menor valor
         for (int v = 0; v < V; v++)
             if (sptSet[v] == false && dist[v] <= min) {
                 min = dist[v];
@@ -11,44 +11,45 @@ class ShortestPath {                // Função utilizada para encontrar o verti
             }
         return min_index;
     }
-    void printSolution(int dist[], int src){        // Função utilizada para printar a solução
-        ArrayList<String> cities = new ArrayList(); //Array das cidades para printar com a distancia
-        cities.add("nulo");
-        cities.add("Arad");
-        cities.add("Bucharest");
-        cities.add("Craiova");
-        cities.add("Dobreta");
-        cities.add("Eforie");
-        cities.add("Fagaras");
-        cities.add("Giurgio");
-        cities.add("Hirsova");
-        cities.add("Iasi");
-        cities.add("Lugoj");
-        cities.add("Mehadia");
-        cities.add("Neamt");
-        cities.add("Oradea");
-        cities.add("Pitesti");
-        cities.add("Rimnicu_Vilsea");
-        cities.add("Sibiu");
-        cities.add("Timisora");
-        cities.add("Urziceni");
-        cities.add("Vaslui");
-        cities.add("Zerind");
-        System.out.println("Distancia entre "+cities.get(1)+" e "+ cities.get(2) +" = "+ dist[1]);
-        System.out.println("Cidade procurada: "+ cities.get(src));
-        System.out.println("\nCidade  -|-  Distancia da cidade Procurada\n");
+    void printSolution(int dist[], int start, int src){ // Função utilizada para printar a solução
+        ArrayList<String> cities = new ArrayList();     //Array das cidades para printar com a distancia
+        cities.add("nulo"); //Cidade 0
+        cities.add("Arad"); //Cidade 1
+        cities.add("Bucharest"); //Cidade 2
+        cities.add("Craiova"); //Cidade 3
+        cities.add("Dobreta"); //Cidade 4
+        cities.add("Eforie"); //Cidade 5
+        cities.add("Fagaras"); //Cidade 6
+        cities.add("Giurgio"); //Cidade 7
+        cities.add("Hirsova"); //Cidade 8
+        cities.add("Iasi"); //Cidade 9
+        cities.add("Lugoj"); //Cidade 10
+        cities.add("Mehadia"); //Cidade 11
+        cities.add("Neamt"); //Cidade 12
+        cities.add("Oradea"); //Cidade 13
+        cities.add("Pitesti"); //Cidade 14
+        cities.add("Rimnicu_Vilsea"); //Cidade 15
+        cities.add("Sibiu"); //Cidade 16
+        cities.add("Timisora"); //Cidade 17
+        cities.add("Urziceni"); //Cidade 18
+        cities.add("Vaslui"); //Cidade 19
+        cities.add("Zerind"); //Cidade 20
+        System.out.println("Cidade de origem: "+ cities.get(start)); // Mostra qual é a cidade origem
+        System.out.println("Cidade procurada: "+ cities.get(src)); // Mostra qual é a cidade buscada
+        System.out.println("Distancia entre "+cities.get(start)+" e "+ cities.get(src) +" = "+ dist[start]); // Printa a distancia entre a cidade origem e cidade buscada
+        System.out.println("\nCidade  -|-  Distancia até a cidade Procurada\n");
         for (int i = 1; i < V; i++){
             System.out.println(cities.get(i)+"  -|-  "+ dist[i]);
         }
     }
-    void dijkstra(int graph[][], int src){ // Essa função que implementa o algoritmo de Dijkstra usando a matriz de adjacencia
-        int dist[] = new int[V];
+    void dijkstra(int graph[][], int start, int src){   // Essa função que implementa o algoritmo de Dijkstra usando a matriz de adjacencia
+        int dist[] = new int[V];    //Cria um vetor de distancias com o tamanho = ao nº de cidades
         Boolean sptSet[] = new Boolean[V];
         for (int i = 0; i < V; i++) {
             dist[i] = Integer.MAX_VALUE;
             sptSet[i] = false;
         }
-        dist[src] = 0;
+        dist[src] = 0;      // A distancia entre o vertice procurado e ele msm é 0
         for (int count = 0; count < V - 1; count++) {
             int u = minDistance(dist, sptSet);
             sptSet[u] = true;
@@ -56,7 +57,7 @@ class ShortestPath {                // Função utilizada para encontrar o verti
                 if (!sptSet[v] && graph[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + graph[u][v] < dist[v])
                     dist[v] = dist[u] + graph[u][v];
         }
-        printSolution(dist, src);
+        printSolution(dist, start, src);    // Chama a função de printar a solução passando o vetor de distancias e o vertice procurado
     }
  
     public static void main(String[] args){ 
@@ -83,6 +84,6 @@ class ShortestPath {                // Função utilizada para encontrar o verti
                                 /*19*/{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0}, 
                                 /*20*/{ 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},}; 
         ShortestPath t = new ShortestPath();
-        t.dijkstra(graph, 2);
+        t.dijkstra(graph, 1, 2); // Passa o grafo , cidade origem e cidade destino
     }
 }
