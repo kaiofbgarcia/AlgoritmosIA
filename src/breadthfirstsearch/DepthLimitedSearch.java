@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package breadthfirstsearch;
+package algoritmos;
 
 /**
  *
@@ -16,15 +16,14 @@ import java.util.Stack;
 public class DepthLimitedSearch{
     private final Stack<Integer> stack;
     private final int numberOfNodes;
-    private static final int MAX_DEPTH = 5;
+    private static final int LIMIT = 2;
  
-    public DepthLimitedSearch(int numberOfNodes)
-    {
+    public DepthLimitedSearch(int numberOfNodes){
         this.numberOfNodes = numberOfNodes;
         this.stack = new Stack<>();
     }
  
-    public void depthLimitedSearch(int adjacencyMatrix[][], int origin){
+    public void depthLimitedSearch(int adjacencyMatrix[][], int origin, int search){
         ArrayList<String> cities = new ArrayList();     //Array das cidades para printar com a distancia
         cities.add("nulo"); //Cidade 0
         cities.add("Arad"); //Cidade 1
@@ -50,7 +49,7 @@ public class DepthLimitedSearch{
         int visited[] = new int[numberOfNodes + 1];
         int element, destination;
         int depth = 0;
-        System.out.println(origin + " == " + cities.get(origin)+ " == " + depth);
+        System.out.println("Origem == " + cities.get(origin)+ " == " + depth);
         stack.push(origin);
         visited[origin] = 1;
         depth = 0;
@@ -58,21 +57,21 @@ public class DepthLimitedSearch{
             element = stack.peek();
             destination = element;
             while (destination <= numberOfNodes){
-                if (depth < MAX_DEPTH){
+                if (depth < LIMIT){
                     if (adjacencyMatrix[element][destination] == 1 && visited[destination] == 0){
                         stack.push(destination);
                         visited[destination] = 1;
                         depth++;
-                        if(destination == 2){
-                            System.out.println(destination + " == " + cities.get(destination)+ " == " + depth);
+                        if(destination == search){
+                            System.out.println("Destino == " + cities.get(destination)+ " == " + depth);
+                            return;
                         }else{
-                            System.out.println(destination + " - " + cities.get(destination)+ " " + depth);
+                        System.out.println(" - " + cities.get(destination)+ " " + depth);
                         }
                         element = destination;
                         destination = 1;
                     }
-                }
-                else{
+                } else{
                     return;
                 }
                 destination++;
@@ -82,7 +81,7 @@ public class DepthLimitedSearch{
         }
     }
     public static void main(String... arg){
-        int number_of_nodes, origin;
+        int number_of_nodes, origin, search;
         try{
             number_of_nodes = 20;
             int graph[][] = new int[][]{//{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}  Matriz de adjacencia 
@@ -108,9 +107,10 @@ public class DepthLimitedSearch{
                                 /*19*/{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}, 
                                 /*20*/{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},}; 
             origin = 1;
+            search = 2;
             System.out.println("Caminho de Arad a Bucharest");
             DepthLimitedSearch depthLimitedSearch = new DepthLimitedSearch(number_of_nodes);
-            depthLimitedSearch.depthLimitedSearch(graph, origin);
+            depthLimitedSearch.depthLimitedSearch(graph, origin, search);
         } catch (InputMismatchException inputMismatch){ 
             System.out.println("Erro de Formatação!");
         }
